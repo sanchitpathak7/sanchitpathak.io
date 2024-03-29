@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Sorting Algorithms | Sanchit Pathak</title>
+<meta name="keywords" content="">
+<meta name="description" content="In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.
+Insertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.
+Pseudocode def sortArray(self, nums: List[int]) -&gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j &gt;=0 and nums[j &#43; 1] &lt; nums[j]: tmp = nums[j &#43; 1] nums[j &#43; 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/blog/dsa/sorting/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/dsa/sorting/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Sorting Algorithms" />
+<meta property="og:description" content="In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.
+Insertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.
+Pseudocode def sortArray(self, nums: List[int]) -&gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j &gt;=0 and nums[j &#43; 1] &lt; nums[j]: tmp = nums[j &#43; 1] nums[j &#43; 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/dsa/sorting/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2024-03-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-13T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sorting Algorithms"/>
+<meta name="twitter:description" content="In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.
+Insertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.
+Pseudocode def sortArray(self, nums: List[int]) -&gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j &gt;=0 and nums[j &#43; 1] &lt; nums[j]: tmp = nums[j &#43; 1] nums[j &#43; 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blogs",
+      "item": "http://localhost:1313/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Sorting Algorithms",
+      "item": "http://localhost:1313/blog/dsa/sorting/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Sorting Algorithms",
+  "name": "Sorting Algorithms",
+  "description": "In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.\nInsertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.\nPseudocode def sortArray(self, nums: List[int]) -\u0026gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j \u0026gt;=0 and nums[j + 1] \u0026lt; nums[j]: tmp = nums[j + 1] nums[j + 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array.",
+  "keywords": [
+    
+  ],
+  "articleBody": "In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.\nInsertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.\nPseudocode def sortArray(self, nums: List[int]) -\u003e List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j \u003e=0 and nums[j + 1] \u003c nums[j]: tmp = nums[j + 1] nums[j + 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array. The j pointer starts off with being one index behind i and as long as j does not go out of bounds, that is, it is not at a negative index, and the j+1 element is smaller than the jth element, we keep decrementing j. This will ensure that we have sorted all the elements before the ith index before moving to the next sub-array (iteration). Above code runs but if submitted on leetcode it gives time limit exceeded error. Reason below. Time Complexity When using insertion sort on a dataset of size n, if the array is already sorted in the best-case scenario, the operation completes in O(n) time. This is because every element in the array still needs to be checked, but the while loop doesn’t need to run. However, in the worst-case scenario where all elements are sorted in reverse order, the while loop will run n times within the for loop, leading to a time complexity of O(n^2). Thus, the algorithm is efficient for only small input sizes. Merge Sort Merge sort is one of the common sorting algorithms as it’s efficient. The basic idea is to take the input array and split them into approximately equal halves and then for those halves split them further till size one is reached and then sort and merge them back in a recursive manner. It is a stable algorithm since the relative order will remain the same.\nPseudocode def mergeSort(arr, start, end): if end - start + 1 \u003c= 1: return arr # Determine the middle index of the array middle = (start + end) // 2 # Sort the left half mergeSort(arr, start, middle) # Sort the right half mergeSort(arr, middle + 1, end) # Merge the sorted halves merge(arr, start, middle, end) return arr # Merge in-place def merge(arr, start, middle, end): # Copy the sorted left and right halves to temporary arrays left_half = arr[start: middle + 1] right_half = arr[middle + 1: end + 1] # Initialize pointers for left and right arrays left_pointer = 0 right_pointer = 0 array_pointer = start # Merge the two sorted halves into the original array while left_pointer \u003c len(left_half) and right_pointer \u003c len(right_half): if left_half[left_pointer] \u003c= right_half[right_pointer]: arr[array_pointer] = left_half[left_pointer] left_pointer += 1 else: arr[array_pointer] = right_half[right_pointer] right_pointer += 1 array_pointer += 1 # Copy any remaining elements from the left half while left_pointer \u003c len(left_half): arr[array_pointer] = left_half[left_pointer] left_pointer += 1 array_pointer += 1 # Copy any remaining elements from the right half while right_pointer \u003c len(right_half): arr[array_pointer] = right_half[right_pointer] right_pointer += 1 array_pointer += 1 Input: arr = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown Time Complexity If n is the length of the array, when we go down the levels, we will get n/2 to the power of x, where we divide n by 2 until we get to 1.\nCalculation:\nMultiply both side by 2^x: n = 2^x Take log on both sides: log n = log2^x Simplify to: log n = xlog2 Hence, we get Olog(n) for the mergeSort() function. Now, for merge() function, we have n steps at any level of the tree. Thus, overall time complexity as O(nlogn). Merge sort runs in the same time complexity in the worst, average and best case scenarios making it more efficient that insertion sort.\nQuick Sort Pseudocode Breakdown Time Complexity Bucket Sort Pseudocode Breakdown Time Complexity Bubble Sort Pseudocode Breakdown Time Complexity ",
+  "wordCount" : "709",
+  "inLanguage": "en",
+  "datePublished": "2024-03-13T00:00:00Z",
+  "dateModified": "2024-03-13T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/dsa/sorting/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sanchit Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Sanchit Pathak (Alt + H)">Sanchit Pathak</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Sorting Algorithms
+    </h1>
+    <div class="post-meta"><span title='2024-03-13 00:00:00 +0000 UTC'>March 13, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.</p>
+<h2 id="insertion-sort">Insertion Sort<a hidden class="anchor" aria-hidden="true" href="#insertion-sort">#</a></h2>
+<p>Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.</p>
+<h3 id="pseudocode">Pseudocode<a hidden class="anchor" aria-hidden="true" href="#pseudocode">#</a></h3>
+<pre tabindex="0"><code>def sortArray(self, nums: List[int]) -&gt; List[int]:
+# Insertion sort breaks the array into sub-arrays and sort them individually
+# Considering 2 pointers approach
+    for i in range(1, len(nums)):
+        j = i - 1
+        while j &gt;=0 and nums[j + 1] &lt; nums[j]:
+            tmp = nums[j + 1]
+            nums[j + 1] = nums[j]
+            nums[j] = tmp
+            j -= 1
+    return nums
+</code></pre><pre tabindex="0"><code>Input: nums = [5,1,1,2,0,0]
+Output: [0,0,1,1,2,5]
+</code></pre><h3 id="breakdown">Breakdown<a hidden class="anchor" aria-hidden="true" href="#breakdown">#</a></h3>
+<ul>
+<li>The i pointer points of the index n−1 where n is the size of the current sub-array.</li>
+<li>The j pointer starts off with being one index behind i and as long as j does not go out of bounds, that is, it is not at a negative index, and the j+1 element is smaller than the jth element, we keep decrementing j. This will ensure that we have sorted all the elements before the ith index before moving to the next sub-array (iteration).</li>
+<li>Above code runs but if submitted on leetcode it gives time limit exceeded error. Reason below.</li>
+</ul>
+<h3 id="time-complexity">Time Complexity<a hidden class="anchor" aria-hidden="true" href="#time-complexity">#</a></h3>
+<ul>
+<li>When using insertion sort on a dataset of size n, if the array is already sorted in the best-case scenario, the operation completes in O(n) time. This is because every element in the array still needs to be checked, but the while loop doesn&rsquo;t need to run.</li>
+<li>However, in the worst-case scenario where all elements are sorted in reverse order, the while loop will run n times within the for loop, leading to a time complexity of O(n^2).</li>
+<li>Thus, the algorithm is efficient for only small input sizes.</li>
+</ul>
+<hr>
+<h2 id="merge-sort">Merge Sort<a hidden class="anchor" aria-hidden="true" href="#merge-sort">#</a></h2>
+<p>Merge sort is one of the common sorting algorithms as it&rsquo;s efficient. The basic idea is to take the input array and split them into approximately equal halves and then for those halves split them further till size one is reached and then sort and merge them back in a recursive manner. It is a stable algorithm since the relative order will remain the same.</p>
+<p><img loading="lazy" src="merge-sort.png" alt="merge-sort"  />
+</p>
+<h3 id="pseudocode-1">Pseudocode<a hidden class="anchor" aria-hidden="true" href="#pseudocode-1">#</a></h3>
+<pre tabindex="0"><code>def mergeSort(arr, start, end):
+    if end - start + 1 &lt;= 1:
+        return arr
+
+    # Determine the middle index of the array
+    middle = (start + end) // 2
+
+    # Sort the left half
+    mergeSort(arr, start, middle)
+
+    # Sort the right half
+    mergeSort(arr, middle + 1, end)
+
+    # Merge the sorted halves
+    merge(arr, start, middle, end)
+    
+    return arr
+
+# Merge in-place
+def merge(arr, start, middle, end):
+    # Copy the sorted left and right halves to temporary arrays
+    left_half = arr[start: middle + 1]
+    right_half = arr[middle + 1: end + 1]
+
+    # Initialize pointers for left and right arrays
+    left_pointer = 0
+    right_pointer = 0
+    array_pointer = start
+
+    # Merge the two sorted halves into the original array
+    while left_pointer &lt; len(left_half) and right_pointer &lt; len(right_half):
+        if left_half[left_pointer] &lt;= right_half[right_pointer]:
+            arr[array_pointer] = left_half[left_pointer]
+            left_pointer += 1
+        else:
+            arr[array_pointer] = right_half[right_pointer]
+            right_pointer += 1
+        array_pointer += 1
+
+    # Copy any remaining elements from the left half
+    while left_pointer &lt; len(left_half):
+        arr[array_pointer] = left_half[left_pointer]
+        left_pointer += 1
+        array_pointer += 1
+
+    # Copy any remaining elements from the right half
+    while right_pointer &lt; len(right_half):
+        arr[array_pointer] = right_half[right_pointer]
+        right_pointer += 1
+        array_pointer += 1
+</code></pre><pre tabindex="0"><code>Input: arr = [5,1,1,2,0,0]
+Output: [0,0,1,1,2,5]
+</code></pre><h3 id="breakdown-1">Breakdown<a hidden class="anchor" aria-hidden="true" href="#breakdown-1">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<h3 id="time-complexity-1">Time Complexity<a hidden class="anchor" aria-hidden="true" href="#time-complexity-1">#</a></h3>
+<ul>
+<li>
+<p>If n is the length of the array, when we go down the levels, we will get n/2 to the power of x, where we divide n by 2 until we get to 1.</p>
+</li>
+<li>
+<p>Calculation:</p>
+<ul>
+<li>Multiply both side by 2^x:
+<code>n = 2^x</code></li>
+<li>Take log on both sides:
+<code>log n = log2^x</code></li>
+<li>Simplify to:
+<code>log n = xlog2</code></li>
+<li>Hence, we get <code>Olog(n)</code> for the mergeSort() function.</li>
+<li>Now, for merge() function, we have n steps at any level of  the tree. Thus, overall time complexity as <code>O(nlogn)</code>.</li>
+</ul>
+</li>
+<li>
+<p>Merge sort runs in the same time complexity in the worst, average and best case scenarios making it more efficient that insertion sort.</p>
+</li>
+</ul>
+<hr>
+<h2 id="quick-sort">Quick Sort<a hidden class="anchor" aria-hidden="true" href="#quick-sort">#</a></h2>
+<h3 id="pseudocode-2">Pseudocode<a hidden class="anchor" aria-hidden="true" href="#pseudocode-2">#</a></h3>
+<pre tabindex="0"><code></code></pre><h3 id="breakdown-2">Breakdown<a hidden class="anchor" aria-hidden="true" href="#breakdown-2">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<h3 id="time-complexity-2">Time Complexity<a hidden class="anchor" aria-hidden="true" href="#time-complexity-2">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<hr>
+<h2 id="bucket-sort">Bucket Sort<a hidden class="anchor" aria-hidden="true" href="#bucket-sort">#</a></h2>
+<h3 id="pseudocode-3">Pseudocode<a hidden class="anchor" aria-hidden="true" href="#pseudocode-3">#</a></h3>
+<pre tabindex="0"><code></code></pre><h3 id="breakdown-3">Breakdown<a hidden class="anchor" aria-hidden="true" href="#breakdown-3">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<h3 id="time-complexity-3">Time Complexity<a hidden class="anchor" aria-hidden="true" href="#time-complexity-3">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<hr>
+<h2 id="bubble-sort">Bubble Sort<a hidden class="anchor" aria-hidden="true" href="#bubble-sort">#</a></h2>
+<h3 id="pseudocode-4">Pseudocode<a hidden class="anchor" aria-hidden="true" href="#pseudocode-4">#</a></h3>
+<pre tabindex="0"><code></code></pre><h3 id="breakdown-4">Breakdown<a hidden class="anchor" aria-hidden="true" href="#breakdown-4">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<h3 id="time-complexity-4">Time Complexity<a hidden class="anchor" aria-hidden="true" href="#time-complexity-4">#</a></h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/blog/cloud/calico/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Calico</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://localhost:1313/">Sanchit Pathak</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

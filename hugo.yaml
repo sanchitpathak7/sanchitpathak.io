@@ -1,0 +1,46 @@
+baseURL: 'https://sanchitpathak.com/'
+languageCode: 'en-us'
+title: 'Sanchit Pathak'
+theme: 'PaperMod'
+
+params:
+  profileMode:
+    enabled: true
+    title: Hello and welcome to my personal blog!
+    subtitle: Here, I'll be reflecting on my journey in the world of DevOps, articulating thoughts and insights as I explore this dynamic field.
+    imageUrl: "https://avatars.githubusercontent.com/u/44384286?v=4"
+    imageWidth: 240
+    imageHeight: 240
+  env: production
+  ShowCodeCopyButtons: true
+  disableScrollToTop: false
+  comments: false
+  email: sanchitpathak17@gmail.com
+  style: auto
+  ShowPostNavLinks: true
+  showSubscribe: true
+  showRelatedPosts: true
+  paginate: 5
+  socialIcons:
+    - name: github
+      url: "https://github.com/sanchitpathak7/"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/sanchit-pathak7/"
+menu:
+  main:
+    - identifier: "home"
+      name: "Home"
+      url: "/"
+      weight: 1
+    - identifier: "blog"
+      name: "Blog"
+      pageRef: "/blog"
+      weight: 2
+    - identifier: "about"
+      name: "About"
+      url: "/about"
+      weight: 3
+    - identifier: "notes"
+      name: "Notes"
+      pageRef: "/notes"
+      weight: 4

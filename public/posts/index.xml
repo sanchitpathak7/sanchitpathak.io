@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Sanchit Pathak Blogs</title>
-    <link>https://example.org/posts/</link>
-    <description>Sanchit Pathak Blogs (Posts)</description>
+    <title>Posts on Sanchit Pathak</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Sanchit Pathak</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 Mar 2024 12:11:28 -0600</lastBuildDate>
-    
-    <atom:link href="https://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Calico</title>
+      <link>http://localhost:1313/posts/cloud/calico/</link>
+      <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
+      <guid>http://localhost:1313/posts/cloud/calico/</guid>
+      <description>Learn calico</description>
+    </item>
     <item>
       <title>Deep Dive: Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager</title>
-      <link>https://example.org/posts/first-post/</link>
+      <link>http://localhost:1313/posts/cloud/first-post/</link>
       <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
-      
-      <guid>https://example.org/posts/first-post/</guid>
-      <description>&lt;p&gt;Hello! Welcome to first post!&lt;/p&gt;
-</description>
+      <guid>http://localhost:1313/posts/cloud/first-post/</guid>
+      <description>In this blog post we are going to go over a few examples of how to create ingress resources that utilize Cert-Manager and the Nginx Ingress Controller..</description>
     </item>
-    
+    <item>
+      <title>My understanding of how NGINX Ingress Controller works</title>
+      <link>http://localhost:1313/posts/cloud/nginx/</link>
+      <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
+      <guid>http://localhost:1313/posts/cloud/nginx/</guid>
+      <description>NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..</description>
+    </item>
+    <item>
+      <title>Pythonnn</title>
+      <link>http://localhost:1313/posts/python/python/</link>
+      <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
+      <guid>http://localhost:1313/posts/python/python/</guid>
+      <description>Let&amp;rsquo;s learn python.</description>
+    </item>
   </channel>
 </rss>

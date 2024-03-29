@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blogs on Sanchit Pathak</title>
+    <link>http://localhost:1313/blog/</link>
+    <description>Recent content in Blogs on Sanchit Pathak</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sorting Algorithms Zion</title>
+      <link>http://localhost:1313/blog/algorithms/sorting/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/algorithms/sorting/</guid>
+      <description>In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.
+Insertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.
+Pseudocode def sortArray(self, nums: List[int]) -&amp;gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j &amp;gt;=0 and nums[j + 1] &amp;lt; nums[j]: tmp = nums[j + 1] nums[j + 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array.</description>
+    </item>
+    <item>
+      <title>Utility Scripts</title>
+      <link>http://localhost:1313/blog/scripting/bash/</link>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/scripting/bash/</guid>
+      <description>Here, I am putting some basic scripts that I had to put together when automating smaller tasks.
+Script to reboot instances part of a K8s cluster in a least impactful manner Script to install a third party scan tool on a bunch of cluster nodes Script to modify tag key names on RDS instances </description>
+    </item>
+    <item>
+      <title>Deep Dive: Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager</title>
+      <link>http://localhost:1313/blog/cloud/nginx-lets-encrypt/</link>
+      <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
+      <guid>http://localhost:1313/blog/cloud/nginx-lets-encrypt/</guid>
+      <description>In this blog post we are going to go over a few examples of how to create ingress resources that utilize Cert-Manager and the Nginx Ingress Controller..
+apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: minimal-ingress annotations: kubernetes.io/ingress.class: &amp;#34;nginx&amp;#34; cert-manager.io/cluster-issuer: &amp;#34;yc-clusterissuer&amp;#34; spec: tls: - hosts: - &amp;lt;your_domain_URL&amp;gt; secretName: domain-name-secret rules: - host: &amp;lt;your_domain_URL&amp;gt; http: paths: - path: / pathType: Prefix backend: service: name: app port: number: 80 --- apiVersion: v1 kind: Service metadata: name: app spec: selector: app: app ports: - protocol: TCP port: 80 targetPort: 80 --- apiVersion: apps/v1 kind: Deployment metadata: name: app-deployment labels: app: app spec: replicas: 1 selector: matchLabels: app: app template: metadata: labels: app: app spec: containers: - name: app image: nginx:latest ports: - containerPort: 80 </description>
+    </item>
+    <item>
+      <title>My understanding of how NGINX Ingress Controller works</title>
+      <link>http://localhost:1313/blog/cloud/nginx/</link>
+      <pubDate>Tue, 05 Mar 2024 12:11:28 -0600</pubDate>
+      <guid>http://localhost:1313/blog/cloud/nginx/</guid>
+      <description>NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/algorithms/binary-search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/algorithms/binary-search/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/algorithms/linked-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/algorithms/linked-list/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/algorithms/trees/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/algorithms/trees/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/aws/karpenter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/aws/karpenter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/blog/aws/loadbalancer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/aws/loadbalancer/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
