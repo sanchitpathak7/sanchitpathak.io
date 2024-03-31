@@ -8,7 +8,7 @@ params:
     enabled: true
     title: Hello and welcome to my personal blog!
     subtitle: Here, I'll be reflecting on my journey in the world of DevOps, articulating thoughts and insights as I explore this dynamic field.
-    imageUrl: "https://avatars.githubusercontent.com/u/44384286?v=4"
+    imageUrl: "https://github.com/sanchitpathak7/sanchitpathak7/assets/44384286/783b228c-ec1e-45c6-bfa0-f51d4b5b0494"
     imageWidth: 240
     imageHeight: 240
   env: production

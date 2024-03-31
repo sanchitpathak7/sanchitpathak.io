@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kubernetes on Sanchit Pathak</title>
+    <link>http://localhost:1313/subcategories/kubernetes/</link>
+    <description>Recent content in Kubernetes on Sanchit Pathak</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/subcategories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deep Dive: Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager</title>
+      <link>http://localhost:1313/blog/cloud/nginx-lets-encrypt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/cloud/nginx-lets-encrypt/</guid>
+      <description>In this blog post we are going to go over a few examples of how to create ingress resources that utilize Cert-Manager and the Nginx Ingress Controller..
+apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: minimal-ingress annotations: kubernetes.io/ingress.class: &amp;#34;nginx&amp;#34; cert-manager.io/cluster-issuer: &amp;#34;yc-clusterissuer&amp;#34; spec: tls: - hosts: - &amp;lt;your_domain_URL&amp;gt; secretName: domain-name-secret rules: - host: &amp;lt;your_domain_URL&amp;gt; http: paths: - path: / pathType: Prefix backend: service: name: app port: number: 80 --- apiVersion: v1 kind: Service metadata: name: app spec: selector: app: app ports: - protocol: TCP port: 80 targetPort: 80 --- apiVersion: apps/v1 kind: Deployment metadata: name: app-deployment labels: app: app spec: replicas: 1 selector: matchLabels: app: app template: metadata: labels: app: app spec: containers: - name: app image: nginx:latest ports: - containerPort: 80 </description>
+    </item>
+  </channel>
+</rss>

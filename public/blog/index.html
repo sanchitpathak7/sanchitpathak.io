@@ -10,7 +10,7 @@
 <meta name="description" content="Blogs - Sanchit Pathak">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/blog/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7ebdb09b9f353c4beb4b5cd63794ffcaac493ff418014513a5bf79e01c0408dd.css" integrity="sha256-fr2wm581PEvrS1zWN5T/yqxJP/QYAUUTpb954BwECN0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -156,114 +156,15 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Sorting Algorithms Zion
+    <h2 class="entry-hint-parent">EKS Cluster Provisioning with VPC Configuration using Terraform
     </h2>
   </header>
   <div class="entry-content">
-    <p>In this blog post I am going over different sorting algorithms as I understand them and also compare their efficieny in terms of time complexity.
-Insertion Sort Insertion sort breaks the arrays into sub-arrays and sorts them individually, which results in a sorted array. This is a stable sorting algorithm since the relative order will remain the same.
-Pseudocode def sortArray(self, nums: List[int]) -&gt; List[int]: # Insertion sort breaks the array into sub-arrays and sort them individually # Considering 2 pointers approach for i in range(1, len(nums)): j = i - 1 while j &gt;=0 and nums[j &#43; 1] &lt; nums[j]: tmp = nums[j &#43; 1] nums[j &#43; 1] = nums[j] nums[j] = tmp j -= 1 return nums Input: nums = [5,1,1,2,0,0] Output: [0,0,1,1,2,5] Breakdown The i pointer points of the index n−1 where n is the size of the current sub-array....</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-03-13 00:00:00 +0000 UTC'>March 13, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Sorting Algorithms Zion" href="http://localhost:1313/blog/algorithms/sorting/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Utility Scripts
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Here, I am putting some basic scripts that I had to put together when automating smaller tasks.
-Script to reboot instances part of a K8s cluster in a least impactful manner Script to install a third party scan tool on a bunch of cluster nodes Script to modify tag key names on RDS instances </p>
-  </div>
-  <footer class="entry-footer"><span title='2024-03-13 00:00:00 +0000 UTC'>March 13, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Utility Scripts" href="http://localhost:1313/blog/scripting/bash/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Deep Dive: Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>In this blog post we are going to go over a few examples of how to create ingress resources that utilize Cert-Manager and the Nginx Ingress Controller..
-apiVersion: networking.k8s.io/v1 kind: Ingress metadata: name: minimal-ingress annotations: kubernetes.io/ingress.class: &#34;nginx&#34; cert-manager.io/cluster-issuer: &#34;yc-clusterissuer&#34; spec: tls: - hosts: - &lt;your_domain_URL&gt; secretName: domain-name-secret rules: - host: &lt;your_domain_URL&gt; http: paths: - path: / pathType: Prefix backend: service: name: app port: number: 80 --- apiVersion: v1 kind: Service metadata: name: app spec: selector: app: app ports: - protocol: TCP port: 80 targetPort: 80 --- apiVersion: apps/v1 kind: Deployment metadata: name: app-deployment labels: app: app spec: replicas: 1 selector: matchLabels: app: app template: metadata: labels: app: app spec: containers: - name: app image: nginx:latest ports: - containerPort: 80 </p>
-  </div>
-  <footer class="entry-footer"><span title='2024-03-05 12:11:28 -0600 CST'>March 5, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Deep Dive: Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager" href="http://localhost:1313/blog/cloud/nginx-lets-encrypt/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">My understanding of how NGINX Ingress Controller works
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-03-05 12:11:28 -0600 CST'>March 5, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to My understanding of how NGINX Ingress Controller works" href="http://localhost:1313/blog/cloud/nginx/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
+    <p>Terraform’s declarative approach allows to describe the infrastructure in a high-level manner where it evaluates the current state of the infrastructure and determines what actions need to be taken to reach the desired state. Also, its idempotent nature means that applying the same configuration multiple times will result in the same end state as applying it once.
+In this blog post I am going over how to setup EKS cluster using Terraform including all the pre-requistites of setting up VPC, SG etc....</p>
   </div>
   <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/blog/algorithms/binary-search/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/blog/algorithms/linked-list/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/blog/algorithms/trees/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/blog/aws/karpenter/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p></p>
-  </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/blog/aws/loadbalancer/"></a>
+  <a class="entry-link" aria-label="post link to EKS Cluster Provisioning with VPC Configuration using Terraform" href="http://localhost:1313/blog/eks-with-terraform/"></a>
 </article>
     </main>
     

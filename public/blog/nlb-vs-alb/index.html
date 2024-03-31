@@ -5,12 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Notes | Sanchit Pathak</title>
+<title>My understanding of how NGINX Ingress Controller works | Sanchit Pathak</title>
 <meta name="keywords" content="">
-<meta name="description" content="Notes - Sanchit Pathak">
+<meta name="description" content="NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/notes/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.7ebdb09b9f353c4beb4b5cd63794ffcaac493ff418014513a5bf79e01c0408dd.css" integrity="sha256-fr2wm581PEvrS1zWN5T/yqxJP/QYAUUTpb954BwECN0=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="http://localhost:1313/blog/nlb-vs-alb/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -18,8 +18,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/notes/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/notes/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/nlb-vs-alb/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,14 +55,16 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Notes" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/notes/" />
+</noscript><meta property="og:title" content="My understanding of how NGINX Ingress Controller works" />
+<meta property="og:description" content="NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet.." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/nlb-vs-alb/" /><meta property="article:section" content="blog" />
+
+
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Notes"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="My understanding of how NGINX Ingress Controller works"/>
+<meta name="twitter:description" content="NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet.."/>
 
 
 <script type="application/ld+json">
@@ -74,15 +75,50 @@
     {
       "@type": "ListItem",
       "position":  1 ,
-      "name": "Notes",
-      "item": "http://localhost:1313/notes/"
+      "name": "Blogs",
+      "item": "http://localhost:1313/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "My understanding of how NGINX Ingress Controller works",
+      "item": "http://localhost:1313/blog/nlb-vs-alb/"
     }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "My understanding of how NGINX Ingress Controller works",
+  "name": "My understanding of how NGINX Ingress Controller works",
+  "description": "NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..",
+  "keywords": [
+    
+  ],
+  "articleBody": "NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..\n",
+  "wordCount" : "16",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/nlb-vs-alb/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sanchit Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -141,42 +177,46 @@
             </li>
             <li>
                 <a href="http://localhost:1313/notes/" title="Notes">
-                    <span class="active">Notes</span>
+                    <span>Notes</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main"> 
-<header class="page-header">
-  <h1>
-    Notes
-  </h1>
-</header>
+<main class="main">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Linux Cheat Sheet
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Top Linux Commands
-find: Search for files and directories based on various criteria. find /path/to/search -name &#34;*.txt&#34; grep: Use advanced patterns and options for searching text. grep -E &#34;pattern1|pattern2&#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk &#39;{print $1}&#39; file.txt sed: Stream editor for modifying text using patterns. sed &#39;s/search/replace/&#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations....</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-03-05 00:00:00 +0000 UTC'>March 5, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Linux Cheat Sheet" href="http://localhost:1313/notes/linux/"></a>
-</article>
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      My understanding of how NGINX Ingress Controller works
+    </h1>
+    <div class="post-meta">
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Kubernetes Cheat Sheet
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Create a Job which prints output $ kubectl create job hello --image=busybox:1.28 -- echo &#34;Hello World&#34; Create a CronJob that prints Hello World every minute kubectl create cronjob hello --image=busybox:1.28 --schedule=&#34;*/1 * * * *&#34; -- echo &#34;Hello World&#34; Get all running pods in the namespace kubectl get pods --field-selector=status.phase=Running Check which nodes are ready JSONPATH=&#39;{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}&#39; \ &amp;&amp; kubectl get nodes -o jsonpath=&#34;$JSONPATH&#34; | grep &#34;Ready=True&#34; List Events sorted by timestamp kubectl get events --sort-by=....</p>
+</div>
+  </header> 
+  <div class="post-content"><p>NGINX Ingress Controller exposing two web applications within a Kubernetes cluster to clients on the internet..</p>
+
+
   </div>
-  <footer class="entry-footer"></footer>
-  <a class="entry-link" aria-label="post link to Kubernetes Cheat Sheet" href="http://localhost:1313/notes/k8s/"></a>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/blog/nginx-lets-encrypt/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Deploying Nginx Controller and Securing it with Let&#39;s Encrypt Certificates via Cert-Manager</span>
+  </a>
+  <a class="next" href="http://localhost:1313/blog/bash/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Utility Scripts</span>
+  </a>
+</nav>
+
+  </footer>
 </article>
     </main>
     
@@ -247,6 +287,53 @@ find: Search for files and directories based on various criteria. find /path/to/
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

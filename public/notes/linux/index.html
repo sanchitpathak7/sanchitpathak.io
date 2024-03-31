@@ -7,10 +7,11 @@
 <meta name="robots" content="index, follow">
 <title>Linux Cheat Sheet | Sanchit Pathak</title>
 <meta name="keywords" content="">
-<meta name="description" content="Top 10 Linux Commands">
+<meta name="description" content="Top Linux Commands
+find: Search for files and directories based on various criteria. find /path/to/search -name &#34;*.txt&#34; grep: Use advanced patterns and options for searching text. grep -E &#34;pattern1|pattern2&#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk &#39;{print $1}&#39; file.txt sed: Stream editor for modifying text using patterns. sed &#39;s/search/replace/&#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/notes/linux/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7ebdb09b9f353c4beb4b5cd63794ffcaac493ff418014513a5bf79e01c0408dd.css" integrity="sha256-fr2wm581PEvrS1zWN5T/yqxJP/QYAUUTpb954BwECN0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -56,7 +57,8 @@
 
     </style>
 </noscript><meta property="og:title" content="Linux Cheat Sheet" />
-<meta property="og:description" content="Top 10 Linux Commands" />
+<meta property="og:description" content="Top Linux Commands
+find: Search for files and directories based on various criteria. find /path/to/search -name &#34;*.txt&#34; grep: Use advanced patterns and options for searching text. grep -E &#34;pattern1|pattern2&#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk &#39;{print $1}&#39; file.txt sed: Stream editor for modifying text using patterns. sed &#39;s/search/replace/&#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/notes/linux/" /><meta property="article:section" content="notes" />
 <meta property="article:published_time" content="2024-03-05T00:00:00+00:00" />
@@ -64,7 +66,8 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux Cheat Sheet"/>
-<meta name="twitter:description" content="Top 10 Linux Commands"/>
+<meta name="twitter:description" content="Top Linux Commands
+find: Search for files and directories based on various criteria. find /path/to/search -name &#34;*.txt&#34; grep: Use advanced patterns and options for searching text. grep -E &#34;pattern1|pattern2&#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk &#39;{print $1}&#39; file.txt sed: Stream editor for modifying text using patterns. sed &#39;s/search/replace/&#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations."/>
 
 
 <script type="application/ld+json">
@@ -93,12 +96,12 @@
   "@type": "BlogPosting",
   "headline": "Linux Cheat Sheet",
   "name": "Linux Cheat Sheet",
-  "description": "Top 10 Linux Commands",
+  "description": "Top Linux Commands\nfind: Search for files and directories based on various criteria. find /path/to/search -name \u0026#34;*.txt\u0026#34; grep: Use advanced patterns and options for searching text. grep -E \u0026#34;pattern1|pattern2\u0026#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk \u0026#39;{print $1}\u0026#39; file.txt sed: Stream editor for modifying text using patterns. sed \u0026#39;s/search/replace/\u0026#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations.",
   "keywords": [
     
   ],
-  "articleBody": "Top 10 Linux Commands\n",
-  "wordCount" : "4",
+  "articleBody": "Top Linux Commands\nfind: Search for files and directories based on various criteria. find /path/to/search -name \"*.txt\" grep: Use advanced patterns and options for searching text. grep -E \"pattern1|pattern2\" file.txt awk: A powerful text processing tool for extracting and manipulating data. awk '{print $1}' file.txt sed: Stream editor for modifying text using patterns. sed 's/search/replace/' file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations. rsync -av /source/directory/ /destination/directory/ iptables: Configure firewall rules. iptables -A INPUT -p tcp --dport 22 -j ACCEPT cron: Schedule tasks to run at specific times. crontab -e systemd: Control system services and manage system settings. systemctl start|stop|restart|status service_name journalctl: Query and display messages from the systemd journal. journalctl -u service_name tcpdump: Capture and analyze network packets. tcpdump -i eth0 -n 'port 80' strace: Trace system calls and signals. strace -p PID lsof: List open files and the processes that opened them. lsof -i :port_number Convert a File to Sparse (Files with blocks of empty data that are not allocated on disk) fallocate -d sparsefile ",
+  "wordCount" : "179",
   "inLanguage": "en",
   "datePublished": "2024-03-05T00:00:00Z",
   "dateModified": "2024-03-05T00:00:00Z",
@@ -195,8 +198,64 @@
 
 </div>
   </header> 
-  <div class="post-content"><p>Top 10 Linux Commands</p>
-
+  <div class="post-content"><p>Top Linux Commands</p>
+<ul>
+<li>find: Search for files and directories based on various criteria.</li>
+</ul>
+<pre tabindex="0"><code>find /path/to/search -name &#34;*.txt&#34;
+</code></pre><ul>
+<li>grep: Use advanced patterns and options for searching text.</li>
+</ul>
+<pre tabindex="0"><code>grep -E &#34;pattern1|pattern2&#34; file.txt
+</code></pre><ul>
+<li>awk: A powerful text processing tool for extracting and manipulating data.</li>
+</ul>
+<pre tabindex="0"><code>awk &#39;{print $1}&#39; file.txt
+</code></pre><ul>
+<li>sed: Stream editor for modifying text using patterns.</li>
+</ul>
+<pre tabindex="0"><code>sed &#39;s/search/replace/&#39; file.txt
+</code></pre><ul>
+<li>tar: Create or extract compressed archive files.</li>
+</ul>
+<pre tabindex="0"><code>tar -czvf archive.tar.gz /path/to/directory
+</code></pre><ul>
+<li>rsync: Synchronize files and directories between two locations.</li>
+</ul>
+<pre tabindex="0"><code>rsync -av /source/directory/ /destination/directory/
+</code></pre><ul>
+<li>iptables: Configure firewall rules.</li>
+</ul>
+<pre tabindex="0"><code>iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+</code></pre><ul>
+<li>cron: Schedule tasks to run at specific times.</li>
+</ul>
+<pre tabindex="0"><code>crontab -e
+</code></pre><ul>
+<li>systemd: Control system services and manage system settings.</li>
+</ul>
+<pre tabindex="0"><code>systemctl start|stop|restart|status service_name
+</code></pre><ul>
+<li>journalctl: Query and display messages from the systemd journal.</li>
+</ul>
+<pre tabindex="0"><code>journalctl -u service_name
+</code></pre><ul>
+<li>tcpdump: Capture and analyze network packets.</li>
+</ul>
+<pre tabindex="0"><code>tcpdump -i eth0 -n &#39;port 80&#39;
+</code></pre><ul>
+<li>strace: Trace system calls and signals.</li>
+</ul>
+<pre tabindex="0"><code>strace -p PID
+</code></pre><ul>
+<li>lsof: List open files and the processes that opened them.</li>
+</ul>
+<pre tabindex="0"><code>lsof -i :port_number
+</code></pre><ul>
+<li>Convert a File to Sparse (Files with blocks of empty data that are not allocated on disk)</li>
+</ul>
+<pre tabindex="0"><code>fallocate -d sparsefile
+</code></pre>
 
   </div>
 

@@ -13,7 +13,8 @@
       <link>http://localhost:1313/notes/linux/</link>
       <pubDate>Tue, 05 Mar 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/notes/linux/</guid>
-      <description>Top 10 Linux Commands</description>
+      <description>Top Linux Commands
+find: Search for files and directories based on various criteria. find /path/to/search -name &amp;#34;*.txt&amp;#34; grep: Use advanced patterns and options for searching text. grep -E &amp;#34;pattern1|pattern2&amp;#34; file.txt awk: A powerful text processing tool for extracting and manipulating data. awk &amp;#39;{print $1}&amp;#39; file.txt sed: Stream editor for modifying text using patterns. sed &amp;#39;s/search/replace/&amp;#39; file.txt tar: Create or extract compressed archive files. tar -czvf archive.tar.gz /path/to/directory rsync: Synchronize files and directories between two locations.</description>
     </item>
     <item>
       <title>Kubernetes Cheat Sheet</title>
