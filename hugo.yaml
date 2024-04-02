@@ -1,7 +1,7 @@
 baseURL: 'https://sanchitpathak.com/'
 languageCode: 'en-us'
 title: 'Sanchit Pathak'
-theme: 'PaperMod'
+theme: 'hugo-PaperMod'
 
 params:
   profileMode:
