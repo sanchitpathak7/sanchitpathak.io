@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Azure DevOps CI/CD Project for Distributed Microservice Application | Sanchit Pathak</title>
+<meta name="keywords" content="">
+<meta name="description" content="Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.
+Overall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/blog/azure-devops-cicd/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7ebdb09b9f353c4beb4b5cd63794ffcaac493ff418014513a5bf79e01c0408dd.css" integrity="sha256-fr2wm581PEvrS1zWN5T/yqxJP/QYAUUTpb954BwECN0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/azure-devops-cicd/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Azure DevOps CI/CD Project for Distributed Microservice Application" />
+<meta property="og:description" content="Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.
+Overall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/azure-devops-cicd/" /><meta property="article:section" content="blog" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Azure DevOps CI/CD Project for Distributed Microservice Application"/>
+<meta name="twitter:description" content="Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.
+Overall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blogs",
+      "item": "http://localhost:1313/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Azure DevOps CI/CD Project for Distributed Microservice Application",
+      "item": "http://localhost:1313/blog/azure-devops-cicd/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Azure DevOps CI/CD Project for Distributed Microservice Application",
+  "name": "Azure DevOps CI\/CD Project for Distributed Microservice Application",
+  "description": "Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.\nOverall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.\nOverall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles.\nIn this blog post I am going over how to setup end to end CI/CD project using Azure Devops.\nSource: https://github.com/dockersamples/example-voting-app\nPre-Requisities Import the source repository into Azure DevOps portal: Select main as the default branch: Create resource group azurecicd for the project:\n$ az group create --name azurecicd --location eastus { \"id\": \"/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd\", \"location\": \"eastus\", \"managedBy\": null, \"name\": \"azurecicd\", \"properties\": { \"provisioningState\": \"Succeeded\" }, \"tags\": null, \"type\": \"Microsoft.Resources/resourceGroups\" } Create container registry sanchitazurecicd in Azure Portal: $ az acr create --name sanchitazurecicd --resource-group azurecicd --sku Standard { \"adminUserEnabled\": false, \"anonymousPullEnabled\": false, \"creationDate\": \"2024-04-01T05:27:16.531227+00:00\", \"dataEndpointEnabled\": false, \"dataEndpointHostNames\": [], \"encryption\": { \"keyVaultProperties\": null, \"status\": \"disabled\" }, \"id\": \"/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd/providers/Microsoft.ContainerRegistry/registries/sanchitazurecicd\", \"identity\": null, \"location\": \"eastus\", \"loginServer\": \"sanchitazurecicd.azurecr.io\", \"metadataSearch\": \"Disabled\", \"name\": \"sanchitazurecicd\", \"networkRuleBypassOptions\": \"AzureServices\", \"networkRuleSet\": null, \"policies\": { \"azureAdAuthenticationAsArmPolicy\": { \"status\": \"enabled\" }, \"exportPolicy\": { \"status\": \"enabled\" }, \"quarantinePolicy\": { \"status\": \"disabled\" }, \"retentionPolicy\": { \"days\": 7, \"lastUpdatedTime\": \"2024-04-01T05:27:28.285623+00:00\", \"status\": \"disabled\" }, \"softDeletePolicy\": { \"lastUpdatedTime\": \"2024-04-01T05:27:28.285666+00:00\", \"retentionDays\": 7, \"status\": \"disabled\" }, \"trustPolicy\": { \"status\": \"disabled\", \"type\": \"Notary\" } }, \"privateEndpointConnections\": [], \"provisioningState\": \"Succeeded\", \"publicNetworkAccess\": \"Enabled\", \"resourceGroup\": \"azurecicd\", \"sku\": { \"name\": \"Standard\", \"tier\": \"Standard\" }, \"status\": null, \"systemData\": { \"createdAt\": \"2024-04-01T05:27:16.531227+00:00\", \"createdBy\": \"sanchitpathak17@gmail.com\", \"createdByType\": \"User\", \"lastModifiedAt\": \"2024-04-01T05:27:16.531227+00:00\", \"lastModifiedBy\": \"sanchitpathak17@gmail.com\", \"lastModifiedByType\": \"User\" }, \"tags\": {}, \"type\": \"Microsoft.ContainerRegistry/registries\", \"zoneRedundancy\": \"Disabled\" } Implementing Continuous Integration (CI) Creating VM azureagent for running pipelines: $ az vm create --resource-group azurecicd --name azureagent --image Ubuntu2204 --vnet-name demo-vnet --subnet default --generate-ssh-keys --output json --verbose Use existing SSH public key file: { \"fqdns\": \"\", \"id\": \"/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd/providers/Microsoft.Compute/virtualMachines/azureagent\", \"location\": \"eastus\", \"macAddress\": \"00-0D-3A-57-DA-96\", \"powerState\": \"VM running\", \"privateIpAddress\": \"10.0.0.4\", \"publicIpAddress\": \"13.90.150.209\", \"resourceGroup\": \"azurecicd\", \"zones\": \"\" } Configure new Agent Pool named azureagent in project settings and run the instructions on the created VM azureagent: Connect to the VM and download the binary:\n$ az ssh vm --resource-group azurecicd --vm-name azureagent --subscription 6fecc3e6-8a71-4138-b2a4-6527f4151493 ... sanchitpathak17@gmail.com@azureagent:~$ wget https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz --2024-04-01 17:15:18-- https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz Resolving vstsagentpackage.azureedge.net (vstsagentpackage.azureedge.net)... 72.21.81.200, 2606:2800:11f:17a5:191a:18d5:537:22f9 Connecting to vstsagentpackage.azureedge.net (vstsagentpackage.azureedge.net)|72.21.81.200|:443... connected. HTTP request sent, awaiting response... 200 OK Length: 161771925 (154M) [application/octet-stream] Saving to: ‘vsts-agent-linux-x64-3.236.1.tar.gz’ vsts-agent-linux-x64-3.236.1.tar.gz 100%[====================================================================================================\u003e] 154.28M 114MB/s in 1.4s 2024-04-01 17:15:20 (114 MB/s) - ‘vsts-agent-linux-x64-3.236.1.tar.gz’ saved [161771925/161771925] Untar the binary: sanchitpathak17@gmail.com@azureagent:~/myagent$ tar zxvf vsts-agent-linux-x64-3.236.1.tar.gz ... sanchitpathak17@gmail.com@azureagent:~/myagent$ ls bin config.sh env.sh externals license.html run-docker.sh run.sh vsts-agent-linux-x64-3.236.1.tar.gz Create a Personal Access Token in Azure DevOps Settings and run the config script: sanchitpathak17@gmail.com@azureagent:~/myagent$ ./config.sh _ _ / _ \\ | ___ (_) | (_) / /_\\ \\_____ _ _ __ ___ | |_/ /_ _ __ ___| |_ _ __ ___ ___ | _ |_ / | | | '__/ _ \\ | __/| | '_ \\ / _ \\ | | '_ \\ / _ \\/ __| | | | |/ /| |_| | | | __/ | | | | |_) | __/ | | | | | __/\\__ \\ \\_| |_/___|\\__,_|_| \\___| \\_| |_| .__/ \\___|_|_|_| |_|\\___||___/ | | agent v3.236.1 |_| (commit 1d7a476) \u003e\u003e End User License Agreements: Building sources from a TFVC repository requires accepting the Team Explorer Everywhere End User License Agreement. This step is not required for building sources from Git repositories. A copy of the Team Explorer Everywhere license agreement can be found at: /home/sanchitpathak17/myagent/license.html Enter (Y/N) Accept the Team Explorer Everywhere license agreement now? (press enter for N) \u003e Y \u003e\u003e Connect: Enter server URL \u003e https://dev.azure.com/sanchitpathak17 Enter authentication type (press enter for PAT) \u003e Enter personal access token \u003e **************************************************** Connecting to server ... \u003e\u003e Register Agent: Enter agent pool (press enter for default) \u003e azureagent Enter agent name (press enter for azureagent) \u003e azureagent Scanning for tool capabilities. Connecting to the server. Successfully added the agent Testing agent connection. Enter work folder (press enter for _work) \u003e 2024-04-01 17:22:27Z: Settings Saved. Setup Docker on the VM: sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo apt install docker.io sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo usermod -aG docker sanchitpathak17@gmail.com sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo systemctl restart docker sanchitpathak17@gmail.com@azureagent:~/myagent$ systemctl status docker ● docker.service - Docker Application Container Engine Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled) Active: active (running) since Mon 2024-04-01 17:26:25 UTC; 3s ago TriggeredBy: ● docker.socket Docs: https://docs.docker.com Main PID: 4349 (dockerd) Tasks: 8 Memory: 31.1M CPU: 314ms CGroup: /system.slice/docker.service └─4349 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock Exit the session, log back in again and then run the executable: sanchitpathak17@gmail.com@azureagent:~/myagent$ ./run.sh Scanning for tool capabilities. Connecting to the server. 2024-04-01 17:26:44Z: Listening for Jobs Agent Pool is now online Configuring path based trigger while setting up Azure DevOps Pipelines for Results App.\n$ voting-app/azure-pipelines-result.yml # Docker # Build and push an image to Azure Container Registry # https://docs.microsoft.com/azure/devops/pipelines/languages/docker trigger: paths: include: - result/* resources: - repo: self variables: # Container registry service connection established during pipeline creation dockerRegistryServiceConnection: '37ddf373-922d-4add-b43a-076639b876e8' imageRepository: 'resultapp' containerRegistry: 'sanchitazurecicd.azurecr.io' dockerfilePath: '$(Build.SourcesDirectory)/result/Dockerfile' tag: '$(Build.BuildId)' pool: name: 'azureagent' stages: - stage: Build displayName: Build jobs: - job: Build displayName: Build steps: - task: Docker@2 displayName: Build an image to container registry inputs: containerRegistry: '$(dockerRegistryServiceConnection)' repository: '$(imageRepository)' command: 'build' Dockerfile: 'result/Dockerfile' tags: '$(tag)' - stage: Push displayName: Push jobs: - job: Push displayName: Push steps: - task: Docker@2 displayName: Push an image to container registry inputs: containerRegistry: '$(dockerRegistryServiceConnection)' repository: '$(imageRepository)' command: 'push' tags: '$(tag)' Pipeline Run Succeeded: Configuring path based trigger while setting up Azure DevOps Pipelines for Voting App.\n# Docker # Build and push an image to Azure Container Registry # https://docs.microsoft.com/azure/devops/pipelines/languages/docker trigger: paths: include: - vote/* resources: - repo: self variables: # Container registry service connection established during pipeline creation dockerRegistryServiceConnection: 'eae15d9c-952e-4b9e-bdc3-808d2a63c8f9' imageRepository: 'votingapp' containerRegistry: 'sanchitazurecicd.azurecr.io' dockerfilePath: '$(Build.SourcesDirectory)/result/Dockerfile' tag: '$(Build.BuildId)' pool: name: 'azureagent' stages: - stage: Build displayName: Build an image jobs: - job: Build displayName: Build steps: - task: Docker@2 displayName: Build an image inputs: containerRegistry: '$(dockerRegistryServiceConnection)' repository: '$(imageRepository)' command: 'build' Dockerfile: 'vote/Dockerfile' tags: '$(tag)' - stage: Push displayName: Push an image jobs: - job: Push displayName: Push steps: - task: Docker@2 displayName: Push an image inputs: containerRegistry: '$(dockerRegistryServiceConnection)' repository: '$(imageRepository)' command: 'push' Dockerfile: 'vote/Dockerfile' tags: '$(tag)' Configuring path based trigger while setting up Azure DevOps Pipelines for Worker App. # Docker # Build and push an image to Azure Container Registry # https://docs.microsoft.com/azure/devops/pipelines/languages/docker trigger: paths: include: - worker/* resources: - repo: self variables: # Container registry service connection established during pipeline creation dockerRegistryServiceConnection: '357976e2-83df-43b0-8208-8236ec12a82d' imageRepository: 'workerapp' containerRegistry: 'sanchitazurecicd.azurecr.io' dockerfilePath: '$(Build.SourcesDirectory)/result/Dockerfile' tag: '$(Build.BuildId)' pool: name: 'azureagent' stages: - stage: Build displayName: Build an image jobs: - job: Build displayName: Build steps: - task: Docker@2 displayName: Build an image inputs: containerRegistry: '$(dockerRegistryServiceConnection)' repository: '$(imageRepository)' command: 'build' Dockerfile: 'worker/Dockerfile' tags: '$(tag)' The worker pipeline failed with error: failed to parse platform : \"\" is an invalid component of \"\": platform specifier component must match \"^[A-Za-z0-9_-]+$\": invalid argument Updated the Dockerfile to specify the platform for worker app in Repo section. Azure automatically picked up the change and ran the pipeline successfully. All the pipeline success confirmation: At this stage, all GitHub CI pipelines are migrated to Azure DevOps.\nImplementing Continuous Delivery (CD) Now, for the CD part, first let’s create a AKS i.e. Azure Kubernetes Cluster. $ az aks list --resource-group azuredevops_group --output table Name Location ResourceGroup KubernetesVersion CurrentKubernetesVersion ProvisioningState Fqdn ----------- ---------- ----------------- ------------------- -------------------------- ------------------- ---------------------------------------------- azuredevops westus2 azuredevops_group 1.28.5 1.28.5 Succeeded azuredevops-dns-0y5c1lu4.hcp.westus2.azmk8s.io $ az aks get-credentials --name azuredevops --resource-group azuredevops_group Merged \"azuredevops\" as current context in /Users/sanchit/.kube/config $ kubectl get nodes -o wide NAME STATUS ROLES AGE VERSION INTERNAL-IP EXTERNAL-IP OS-IMAGE KERNEL-VERSION CONTAINER-RUNTIME aks-agentpool-12250849-vmss000000 Ready agent 4m5s v1.28.5 10.224.0.4 20.187.35.201 Ubuntu 22.04.4 LTS 5.15.0-1058-azure containerd://1.7.7-1 Install ArgoCD Reference: https://argo-cd.readthedocs.io/en/stable/getting_started/\n$ kubectl create namespace argocd namespace/argocd created $ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml $ kubectl get all -n argocd NAME READY STATUS RESTARTS AGE pod/argocd-application-controller-0 1/1 Running 0 35s pod/argocd-applicationset-controller-75b78554fd-bz86c 1/1 Running 0 38s pod/argocd-dex-server-869fff9967-9cj42 1/1 Running 0 37s pod/argocd-notifications-controller-5b8dbb7c86-l2sc5 1/1 Running 0 37s pod/argocd-redis-66d9777b78-rfnb2 1/1 Running 0 37s pod/argocd-repo-server-7b8d97c767-prh92 1/1 Running 0 36s pod/argocd-server-5c797497fb-x77xj 1/1 Running 0 36s NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE service/argocd-applicationset-controller ClusterIP 10.0.184.112 7000/TCP,8080/TCP 41s service/argocd-dex-server ClusterIP 10.0.115.30 5556/TCP,5557/TCP,5558/TCP 40s service/argocd-metrics ClusterIP 10.0.249.23 8082/TCP 40s service/argocd-notifications-controller-metrics ClusterIP 10.0.30.135 9001/TCP 40s service/argocd-redis ClusterIP 10.0.54.169 6379/TCP 40s service/argocd-repo-server ClusterIP 10.0.7.221 8081/TCP,8084/TCP 39s service/argocd-server ClusterIP 10.0.149.92 80/TCP,443/TCP 39s service/argocd-server-metrics ClusterIP 10.0.146.7 8083/TCP 39s NAME READY UP-TO-DATE AVAILABLE AGE deployment.apps/argocd-applicationset-controller 1/1 1 1 39s deployment.apps/argocd-dex-server 1/1 1 1 38s deployment.apps/argocd-notifications-controller 1/1 1 1 38s deployment.apps/argocd-redis 1/1 1 1 38s deployment.apps/argocd-repo-server 1/1 1 1 37s deployment.apps/argocd-server 1/1 1 1 37s NAME DESIRED CURRENT READY AGE replicaset.apps/argocd-applicationset-controller-75b78554fd 1 1 1 39s replicaset.apps/argocd-dex-server-869fff9967 1 1 1 38s replicaset.apps/argocd-notifications-controller-5b8dbb7c86 1 1 1 38s replicaset.apps/argocd-redis-66d9777b78 1 1 1 38s replicaset.apps/argocd-repo-server-7b8d97c767 1 1 1 37s replicaset.apps/argocd-server-5c797497fb 1 1 1 37s NAME READY AGE statefulset.apps/argocd-application-controller 1/1 37s Modify the service type to NodePort for argocd-server service and vote service and then add the port numbers as a inbound allow rule on the Node Instance’s NSG.\nConfigure ArgoCD to connect with Azure Repo First, get the secret from K8s secret resource argocd-initial-admin-secret in the argocd namespace and use the nodeIP:NodePort in U/I to load ArgoCD page. Next connect to the Azure Repo using Access Token: Deploy AzureRepo manifests using ArgoCD to the AKS Cluster:\nRepo Create the Application ArgoCD Status From kubectl perspective, all resources are deployed.\n$ kubectl get pods NAME READY STATUS RESTARTS AGE db-6d9f87bb9b-4ngfl 1/1 Running 0 2m18s redis-77fccb7f9-69wgp 1/1 Running 0 2m18s result-54b5ccfc95-xcbvc 1/1 Running 0 2m18s vote-5655bd759-8ln2p 1/1 Running 0 2m18s worker-7dd74bcbbb-d9slw 1/1 Running 0 2m18s sanchit@FVFH81G2Q6LW  ~/devopsprojects/azure-arm  kubectl get all NAME READY STATUS RESTARTS AGE pod/db-6d9f87bb9b-4ngfl 1/1 Running 0 2m26s pod/redis-77fccb7f9-69wgp 1/1 Running 0 2m26s pod/result-54b5ccfc95-xcbvc 1/1 Running 0 2m26s pod/vote-5655bd759-8ln2p 1/1 Running 0 2m26s pod/worker-7dd74bcbbb-d9slw 1/1 Running 0 2m26s NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE service/db ClusterIP 10.0.125.79 5432/TCP 2m26s service/kubernetes ClusterIP 10.0.0.1 443/TCP 40m service/redis ClusterIP 10.0.145.41 6379/TCP 2m26s service/result NodePort 10.0.191.177 5001:31001/TCP 2m26s service/vote NodePort 10.0.65.200 5000:31000/TCP 2m26s NAME READY UP-TO-DATE AVAILABLE AGE deployment.apps/db 1/1 1 1 2m26s deployment.apps/redis 1/1 1 1 2m26s deployment.apps/result 1/1 1 1 2m26s deployment.apps/vote 1/1 1 1 2m26s deployment.apps/worker 1/1 1 1 2m26s NAME DESIRED CURRENT READY AGE replicaset.apps/db-6d9f87bb9b 1 1 1 2m26s replicaset.apps/redis-77fccb7f9 1 1 1 2m26s replicaset.apps/result-54b5ccfc95 1 1 1 2m26s replicaset.apps/vote-5655bd759 1 1 1 2m26s replicaset.apps/worker-7dd74bcbbb 1 1 1 2m26s Vote U/I Loads as expected: Now, at this point any change to the Azure Repo resources in k8s-specifications, ArgoCD will pickup the change and apply it on the AKS cluster.\nUpdate operation Now, we want to see what we need to do to ensure automatic updates to the pipeline and K8s resources if we make changes to vote application code to vote for “Coffee/Tea” instead of “Cats/Dogs”.\nBefore working on changing the pipelines for Update stage, let’s ensure our AKS cluster has authentication to pull images from our ACR.\n$ kubectl create secret docker-registry sanchitazurecicd-acr-secret --docker-server sanchitazurecicd.azurecr.io --docker-username sanchitazurecicd --docker-password= secret/sanchitazurecicd-acr-secret created Ensure that the required deployment YAMLs also has the above created secret set in the ImagePullSecret parameter.\nCreate a updateK8sManifest.sh script in the same repo. Example shown below:\n#!/bin/bash set -x # Set the repo URL REPO_URL=\"https://@dev.azure.com//voting-app/_git/voting-app\" # Clone the git repo into the /tmp directory git clone \"$REPO_URL\" /tmp/temp_repo # Navigate into the cloned repo directory cd /tmp/temp_repo # To change the image tag in a deployment.yaml file. $1 represents the service name. $2 is repository name. $3 is the build tag. sed -i \"s|image:.*|image: /$2:$3|g\" k8s-specifications/$1-deployment.yaml # Add the modified files git add . # Commit the changes git commit -m \"Updated Kubernetes manifest\" # Push the changes back into the repo git push # Cleanup: remove the tmp directory rm -rf /tmp/temp_repo Next, update the vote-service pipeline to include update stage with input as the script file with the arguments.\n... - stage: Update displayName: Update jobs: - job: Update displayName: Update steps: - task: ShellScript@2 inputs: scriptPath: 'manifest-update-scripts/updateK8sManifest.sh' args: 'vote $(imageRepository) $(tag)' All 3 stages are successful on the new run for vote-service: Now, we can see new vote deployment image tag got created in ACR votingapp:10 and the YAML file is also updated correctly and the new updated pod is running.\n$ kubectl get pod vote-67b9fcd78b-kpr6s -o yaml | grep -i image - image: sanchitazurecicd.azurecr.io/votingapp:10 imagePullPolicy: Always Conclusion Below picture (not very asthetic) summarizes in short the entire CI/CD workflow that we acheived. Hope this was helpful. Thank you for reading till the end!\n",
+  "wordCount" : "2085",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/azure-devops-cicd/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sanchit Pathak",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Sanchit Pathak (Alt + H)">Sanchit Pathak</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/" title="Notes">
+                    <span>Notes</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Azure DevOps CI/CD Project for Distributed Microservice Application
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> 
+  <div class="post-content"><p>Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.</p>
+<p>Overall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles.</p>
+<p>In this blog post I am going over how to setup end to end CI/CD project using Azure Devops.</p>
+<p><img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/6488929e-8b3d-4bfc-a081-daafb4947213" alt=""  />
+
+Source: <a href="https://github.com/dockersamples/example-voting-app">https://github.com/dockersamples/example-voting-app</a></p>
+<h3 id="pre-requisities">Pre-Requisities<a hidden class="anchor" aria-hidden="true" href="#pre-requisities">#</a></h3>
+<ul>
+<li>
+<p>Import the source repository into Azure DevOps portal:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/48b71e34-4747-4ed0-92e3-14c117a6061c" alt=""  />
+</p>
+</li>
+<li>
+<p>Select <code>main</code> as the default branch:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/9e224f3c-5518-435c-9636-befbfd67a28a" alt=""  />
+</p>
+</li>
+<li>
+<p>Create resource group <code>azurecicd</code> for the project:</p>
+</li>
+</ul>
+<pre tabindex="0"><code>$ az group create --name azurecicd --location eastus
+{
+  &#34;id&#34;: &#34;/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd&#34;,
+  &#34;location&#34;: &#34;eastus&#34;,
+  &#34;managedBy&#34;: null,
+  &#34;name&#34;: &#34;azurecicd&#34;,
+  &#34;properties&#34;: {
+    &#34;provisioningState&#34;: &#34;Succeeded&#34;
+  },
+  &#34;tags&#34;: null,
+  &#34;type&#34;: &#34;Microsoft.Resources/resourceGroups&#34;
+}
+</code></pre><ul>
+<li>Create container registry <code>sanchitazurecicd</code> in Azure Portal:</li>
+</ul>
+<pre tabindex="0"><code>$ az acr create --name sanchitazurecicd --resource-group azurecicd --sku Standard 
+{
+  &#34;adminUserEnabled&#34;: false,
+  &#34;anonymousPullEnabled&#34;: false,
+  &#34;creationDate&#34;: &#34;2024-04-01T05:27:16.531227+00:00&#34;,
+  &#34;dataEndpointEnabled&#34;: false,
+  &#34;dataEndpointHostNames&#34;: [],
+  &#34;encryption&#34;: {
+    &#34;keyVaultProperties&#34;: null,
+    &#34;status&#34;: &#34;disabled&#34;
+  },
+  &#34;id&#34;: &#34;/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd/providers/Microsoft.ContainerRegistry/registries/sanchitazurecicd&#34;,
+  &#34;identity&#34;: null,
+  &#34;location&#34;: &#34;eastus&#34;,
+  &#34;loginServer&#34;: &#34;sanchitazurecicd.azurecr.io&#34;,
+  &#34;metadataSearch&#34;: &#34;Disabled&#34;,
+  &#34;name&#34;: &#34;sanchitazurecicd&#34;,
+  &#34;networkRuleBypassOptions&#34;: &#34;AzureServices&#34;,
+  &#34;networkRuleSet&#34;: null,
+  &#34;policies&#34;: {
+    &#34;azureAdAuthenticationAsArmPolicy&#34;: {
+      &#34;status&#34;: &#34;enabled&#34;
+    },
+    &#34;exportPolicy&#34;: {
+      &#34;status&#34;: &#34;enabled&#34;
+    },
+    &#34;quarantinePolicy&#34;: {
+      &#34;status&#34;: &#34;disabled&#34;
+    },
+    &#34;retentionPolicy&#34;: {
+      &#34;days&#34;: 7,
+      &#34;lastUpdatedTime&#34;: &#34;2024-04-01T05:27:28.285623+00:00&#34;,
+      &#34;status&#34;: &#34;disabled&#34;
+    },
+    &#34;softDeletePolicy&#34;: {
+      &#34;lastUpdatedTime&#34;: &#34;2024-04-01T05:27:28.285666+00:00&#34;,
+      &#34;retentionDays&#34;: 7,
+      &#34;status&#34;: &#34;disabled&#34;
+    },
+    &#34;trustPolicy&#34;: {
+      &#34;status&#34;: &#34;disabled&#34;,
+      &#34;type&#34;: &#34;Notary&#34;
+    }
+  },
+  &#34;privateEndpointConnections&#34;: [],
+  &#34;provisioningState&#34;: &#34;Succeeded&#34;,
+  &#34;publicNetworkAccess&#34;: &#34;Enabled&#34;,
+  &#34;resourceGroup&#34;: &#34;azurecicd&#34;,
+  &#34;sku&#34;: {
+    &#34;name&#34;: &#34;Standard&#34;,
+    &#34;tier&#34;: &#34;Standard&#34;
+  },
+  &#34;status&#34;: null,
+  &#34;systemData&#34;: {
+    &#34;createdAt&#34;: &#34;2024-04-01T05:27:16.531227+00:00&#34;,
+    &#34;createdBy&#34;: &#34;sanchitpathak17@gmail.com&#34;,
+    &#34;createdByType&#34;: &#34;User&#34;,
+    &#34;lastModifiedAt&#34;: &#34;2024-04-01T05:27:16.531227+00:00&#34;,
+    &#34;lastModifiedBy&#34;: &#34;sanchitpathak17@gmail.com&#34;,
+    &#34;lastModifiedByType&#34;: &#34;User&#34;
+  },
+  &#34;tags&#34;: {},
+  &#34;type&#34;: &#34;Microsoft.ContainerRegistry/registries&#34;,
+  &#34;zoneRedundancy&#34;: &#34;Disabled&#34;
+}
+</code></pre><hr>
+<h3 id="implementing-continuous-integration-ci">Implementing Continuous Integration (CI)<a hidden class="anchor" aria-hidden="true" href="#implementing-continuous-integration-ci">#</a></h3>
+<ul>
+<li>Creating VM <code>azureagent</code> for running pipelines:</li>
+</ul>
+<pre tabindex="0"><code>$ az vm create --resource-group azurecicd --name azureagent --image Ubuntu2204 --vnet-name demo-vnet --subnet default --generate-ssh-keys --output json --verbose
+Use existing SSH public key file: &lt;REDACTED&gt;
+{
+  &#34;fqdns&#34;: &#34;&#34;,
+  &#34;id&#34;: &#34;/subscriptions/6fecc3e6-8a71-4138-b2a4-6527f4151493/resourceGroups/azurecicd/providers/Microsoft.Compute/virtualMachines/azureagent&#34;,
+  &#34;location&#34;: &#34;eastus&#34;,
+  &#34;macAddress&#34;: &#34;00-0D-3A-57-DA-96&#34;,
+  &#34;powerState&#34;: &#34;VM running&#34;,
+  &#34;privateIpAddress&#34;: &#34;10.0.0.4&#34;,
+  &#34;publicIpAddress&#34;: &#34;13.90.150.209&#34;,
+  &#34;resourceGroup&#34;: &#34;azurecicd&#34;,
+  &#34;zones&#34;: &#34;&#34;
+}
+</code></pre><ul>
+<li>
+<p>Configure new Agent Pool named <code>azureagent</code> in project settings and run the instructions on the created VM <code>azureagent</code>:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/64148cb9-7c6a-471f-b6ff-9e009afe516d" alt=""  />
+</p>
+</li>
+<li>
+<p>Connect to the VM and download the binary:</p>
+</li>
+</ul>
+<pre tabindex="0"><code>$ az ssh vm --resource-group azurecicd --vm-name azureagent --subscription 6fecc3e6-8a71-4138-b2a4-6527f4151493
+...
+sanchitpathak17@gmail.com@azureagent:~$ wget https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz
+--2024-04-01 17:15:18--  https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz
+Resolving vstsagentpackage.azureedge.net (vstsagentpackage.azureedge.net)... 72.21.81.200, 2606:2800:11f:17a5:191a:18d5:537:22f9
+Connecting to vstsagentpackage.azureedge.net (vstsagentpackage.azureedge.net)|72.21.81.200|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 161771925 (154M) [application/octet-stream]
+Saving to: ‘vsts-agent-linux-x64-3.236.1.tar.gz’
+vsts-agent-linux-x64-3.236.1.tar.gz             100%[====================================================================================================&gt;] 154.28M   114MB/s    in 1.4s    
+2024-04-01 17:15:20 (114 MB/s) - ‘vsts-agent-linux-x64-3.236.1.tar.gz’ saved [161771925/161771925]
+</code></pre><ul>
+<li>Untar the binary:</li>
+</ul>
+<pre tabindex="0"><code>sanchitpathak17@gmail.com@azureagent:~/myagent$ tar zxvf vsts-agent-linux-x64-3.236.1.tar.gz
+...
+sanchitpathak17@gmail.com@azureagent:~/myagent$ ls
+bin  config.sh  env.sh  externals  license.html  run-docker.sh  run.sh  vsts-agent-linux-x64-3.236.1.tar.gz
+</code></pre><ul>
+<li>Create a Personal Access Token in Azure DevOps Settings and run the config script:</li>
+</ul>
+<pre tabindex="0"><code>sanchitpathak17@gmail.com@azureagent:~/myagent$ ./config.sh
+     _ _
+ / _ \                     | ___ (_)          | (_)
+/ /_\ \_____   _ _ __ ___  | |_/ /_ _ __   ___| |_ _ __   ___  ___
+|  _  |_  / | | | &#39;__/ _ \ |  __/| | &#39;_ \ / _ \ | | &#39;_ \ / _ \/ __|
+| | | |/ /| |_| | | |  __/ | |   | | |_) |  __/ | | | | |  __/\__ \
+\_| |_/___|\__,_|_|  \___| \_|   |_| .__/ \___|_|_|_| |_|\___||___/
+                                   | |
+        agent v3.236.1             |_|          (commit 1d7a476)
+&gt;&gt; End User License Agreements:
+Building sources from a TFVC repository requires accepting the Team Explorer Everywhere End User License Agreement. This step is not required for building sources from Git repositories.
+A copy of the Team Explorer Everywhere license agreement can be found at:
+  /home/sanchitpathak17/myagent/license.html
+Enter (Y/N) Accept the Team Explorer Everywhere license agreement now? (press enter for N) &gt; Y
+&gt;&gt; Connect:
+Enter server URL &gt; https://dev.azure.com/sanchitpathak17
+Enter authentication type (press enter for PAT) &gt; 
+Enter personal access token &gt; ****************************************************
+Connecting to server ...
+
+&gt;&gt; Register Agent:
+Enter agent pool (press enter for default) &gt; azureagent
+Enter agent name (press enter for azureagent) &gt; azureagent
+Scanning for tool capabilities.
+Connecting to the server.
+Successfully added the agent
+Testing agent connection.
+Enter work folder (press enter for _work) &gt; 
+2024-04-01 17:22:27Z: Settings Saved.
+</code></pre><ul>
+<li>Setup Docker on the VM:</li>
+</ul>
+<pre tabindex="0"><code>sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo apt install docker.io
+sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo usermod -aG docker sanchitpathak17@gmail.com
+sanchitpathak17@gmail.com@azureagent:~/myagent$ sudo systemctl restart docker
+sanchitpathak17@gmail.com@azureagent:~/myagent$ systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2024-04-01 17:26:25 UTC; 3s ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 4349 (dockerd)
+      Tasks: 8
+     Memory: 31.1M
+        CPU: 314ms
+     CGroup: /system.slice/docker.service
+             └─4349 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+</code></pre><ul>
+<li>Exit the session, log back in again and then run the executable:</li>
+</ul>
+<pre tabindex="0"><code>sanchitpathak17@gmail.com@azureagent:~/myagent$ ./run.sh 
+Scanning for tool capabilities.
+Connecting to the server.
+2024-04-01 17:26:44Z: Listening for Jobs
+</code></pre><ul>
+<li>
+<p>Agent Pool is now online
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/ae52cbc9-3233-4c6d-b195-76aac3ff3248" alt=""  />
+</p>
+</li>
+<li>
+<p>Configuring path based trigger while setting up Azure DevOps Pipelines for <code>Results</code> App.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>$ voting-app/azure-pipelines-result.yml
+
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  paths:
+    include:
+      - result/*
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: &#39;37ddf373-922d-4add-b43a-076639b876e8&#39;
+  imageRepository: &#39;resultapp&#39;
+  containerRegistry: &#39;sanchitazurecicd.azurecr.io&#39;
+  dockerfilePath: &#39;$(Build.SourcesDirectory)/result/Dockerfile&#39;
+  tag: &#39;$(Build.BuildId)&#39;
+
+pool:
+  name: &#39;azureagent&#39;
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build an image to container registry
+      inputs:
+        containerRegistry: &#39;$(dockerRegistryServiceConnection)&#39;
+        repository: &#39;$(imageRepository)&#39;
+        command: &#39;build&#39;
+        Dockerfile: &#39;result/Dockerfile&#39;
+        tags: &#39;$(tag)&#39;
+- stage: Push
+  displayName: Push
+  jobs:
+  - job: Push
+    displayName: Push
+    steps:
+    - task: Docker@2
+      displayName: Push an image to container registry
+      inputs:
+        containerRegistry: &#39;$(dockerRegistryServiceConnection)&#39;
+        repository: &#39;$(imageRepository)&#39;
+        command: &#39;push&#39;
+        tags: &#39;$(tag)&#39;
+</code></pre><ul>
+<li>
+<p>Pipeline Run Succeeded:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/62447958-9f09-438e-b36f-6e7824b9f040" alt=""  />
+</p>
+</li>
+<li>
+<p>Configuring path based trigger while setting up Azure DevOps Pipelines for <code>Voting</code> App.</p>
+</li>
+</ul>
+<pre tabindex="0"><code># Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  paths:
+    include:
+      - vote/*
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: &#39;eae15d9c-952e-4b9e-bdc3-808d2a63c8f9&#39;
+  imageRepository: &#39;votingapp&#39;
+  containerRegistry: &#39;sanchitazurecicd.azurecr.io&#39;
+  dockerfilePath: &#39;$(Build.SourcesDirectory)/result/Dockerfile&#39;
+  tag: &#39;$(Build.BuildId)&#39;
+
+pool:
+  name: &#39;azureagent&#39;
+
+stages:
+- stage: Build
+  displayName: Build an image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: &#39;$(dockerRegistryServiceConnection)&#39;
+        repository: &#39;$(imageRepository)&#39;
+        command: &#39;build&#39;
+        Dockerfile: &#39;vote/Dockerfile&#39;
+        tags: &#39;$(tag)&#39;
+- stage: Push
+  displayName: Push an image
+  jobs:
+  - job: Push
+    displayName: Push
+    steps:
+    - task: Docker@2
+      displayName: Push an image
+      inputs:
+        containerRegistry: &#39;$(dockerRegistryServiceConnection)&#39;
+        repository: &#39;$(imageRepository)&#39;
+        command: &#39;push&#39;
+        Dockerfile: &#39;vote/Dockerfile&#39;
+        tags: &#39;$(tag)&#39;
+</code></pre><ul>
+<li>Configuring path based trigger while setting up Azure DevOps Pipelines for <code>Worker</code> App.</li>
+</ul>
+<pre tabindex="0"><code># Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  paths:
+    include:
+      - worker/*
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: &#39;357976e2-83df-43b0-8208-8236ec12a82d&#39;
+  imageRepository: &#39;workerapp&#39;
+  containerRegistry: &#39;sanchitazurecicd.azurecr.io&#39;
+  dockerfilePath: &#39;$(Build.SourcesDirectory)/result/Dockerfile&#39;
+  tag: &#39;$(Build.BuildId)&#39;
+
+pool:
+  name: &#39;azureagent&#39;
+
+stages:
+- stage: Build
+  displayName: Build an image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: &#39;$(dockerRegistryServiceConnection)&#39;
+        repository: &#39;$(imageRepository)&#39;
+        command: &#39;build&#39;
+        Dockerfile: &#39;worker/Dockerfile&#39;
+        tags: &#39;$(tag)&#39;
+</code></pre><ul>
+<li>The worker pipeline failed with error:</li>
+</ul>
+<pre tabindex="0"><code>failed to parse platform : &#34;&#34; is an invalid component of &#34;&#34;: platform specifier component must match &#34;^[A-Za-z0-9_-]+$&#34;: invalid argument
+</code></pre><ul>
+<li>
+<p>Updated the Dockerfile to specify the platform for worker app in Repo section. Azure automatically picked up the change and ran the pipeline successfully.
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/890feb70-12de-4f02-b999-03eb9d9faaad" alt=""  />
+</p>
+</li>
+<li>
+<p>All the pipeline success confirmation:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/d04aa637-b67d-4b26-90a7-233cf2f15bc5" alt=""  />
+</p>
+</li>
+<li>
+<p>At this stage, all GitHub CI pipelines are migrated to Azure DevOps.</p>
+</li>
+</ul>
+<hr>
+<h3 id="implementing-continuous-delivery-cd">Implementing Continuous Delivery (CD)<a hidden class="anchor" aria-hidden="true" href="#implementing-continuous-delivery-cd">#</a></h3>
+<ul>
+<li>Now, for the CD part, first let&rsquo;s create a AKS i.e. Azure Kubernetes Cluster.</li>
+</ul>
+<pre tabindex="0"><code>$ az aks list --resource-group azuredevops_group --output table
+Name         Location    ResourceGroup      KubernetesVersion    CurrentKubernetesVersion    ProvisioningState    Fqdn
+-----------  ----------  -----------------  -------------------  --------------------------  -------------------  ----------------------------------------------
+azuredevops  westus2     azuredevops_group  1.28.5               1.28.5                      Succeeded            azuredevops-dns-0y5c1lu4.hcp.westus2.azmk8s.io
+</code></pre><pre tabindex="0"><code>$ az aks get-credentials --name azuredevops --resource-group azuredevops_group
+Merged &#34;azuredevops&#34; as current context in /Users/sanchit/.kube/config
+
+$ kubectl get nodes -o wide
+NAME                                STATUS   ROLES   AGE    VERSION   INTERNAL-IP   EXTERNAL-IP     OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+aks-agentpool-12250849-vmss000000   Ready    agent   4m5s   v1.28.5   10.224.0.4    20.187.35.201   Ubuntu 22.04.4 LTS   5.15.0-1058-azure   containerd://1.7.7-1
+</code></pre><ul>
+<li>Install ArgoCD</li>
+</ul>
+<p>Reference: <a href="https://argo-cd.readthedocs.io/en/stable/getting_started/">https://argo-cd.readthedocs.io/en/stable/getting_started/</a></p>
+<pre tabindex="0"><code>$ kubectl create namespace argocd
+namespace/argocd created
+
+$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+</code></pre><pre tabindex="0"><code>$ kubectl get all -n argocd
+NAME                                                    READY   STATUS    RESTARTS   AGE
+pod/argocd-application-controller-0                     1/1     Running   0          35s
+pod/argocd-applicationset-controller-75b78554fd-bz86c   1/1     Running   0          38s
+pod/argocd-dex-server-869fff9967-9cj42                  1/1     Running   0          37s
+pod/argocd-notifications-controller-5b8dbb7c86-l2sc5    1/1     Running   0          37s
+pod/argocd-redis-66d9777b78-rfnb2                       1/1     Running   0          37s
+pod/argocd-repo-server-7b8d97c767-prh92                 1/1     Running   0          36s
+pod/argocd-server-5c797497fb-x77xj                      1/1     Running   0          36s
+
+NAME                                              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+service/argocd-applicationset-controller          ClusterIP   10.0.184.112   &lt;none&gt;        7000/TCP,8080/TCP            41s
+service/argocd-dex-server                         ClusterIP   10.0.115.30    &lt;none&gt;        5556/TCP,5557/TCP,5558/TCP   40s
+service/argocd-metrics                            ClusterIP   10.0.249.23    &lt;none&gt;        8082/TCP                     40s
+service/argocd-notifications-controller-metrics   ClusterIP   10.0.30.135    &lt;none&gt;        9001/TCP                     40s
+service/argocd-redis                              ClusterIP   10.0.54.169    &lt;none&gt;        6379/TCP                     40s
+service/argocd-repo-server                        ClusterIP   10.0.7.221     &lt;none&gt;        8081/TCP,8084/TCP            39s
+service/argocd-server                             ClusterIP   10.0.149.92    &lt;none&gt;        80/TCP,443/TCP               39s
+service/argocd-server-metrics                     ClusterIP   10.0.146.7     &lt;none&gt;        8083/TCP                     39s
+
+NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/argocd-applicationset-controller   1/1     1            1           39s
+deployment.apps/argocd-dex-server                  1/1     1            1           38s
+deployment.apps/argocd-notifications-controller    1/1     1            1           38s
+deployment.apps/argocd-redis                       1/1     1            1           38s
+deployment.apps/argocd-repo-server                 1/1     1            1           37s
+deployment.apps/argocd-server                      1/1     1            1           37s
+
+NAME                                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/argocd-applicationset-controller-75b78554fd   1         1         1       39s
+replicaset.apps/argocd-dex-server-869fff9967                  1         1         1       38s
+replicaset.apps/argocd-notifications-controller-5b8dbb7c86    1         1         1       38s
+replicaset.apps/argocd-redis-66d9777b78                       1         1         1       38s
+replicaset.apps/argocd-repo-server-7b8d97c767                 1         1         1       37s
+replicaset.apps/argocd-server-5c797497fb                      1         1         1       37s
+
+NAME                                             READY   AGE
+statefulset.apps/argocd-application-controller   1/1     37s
+</code></pre><p>Modify the service type to NodePort for argocd-server service and vote service and then add the port numbers as a inbound allow rule on the Node Instance&rsquo;s NSG.</p>
+<ul>
+<li>Configure ArgoCD to connect with Azure Repo
+<ul>
+<li>
+<p>First, get the secret from K8s secret resource <code>argocd-initial-admin-secret</code> in the argocd namespace and use the nodeIP:NodePort in U/I to load ArgoCD page.
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/7706991c-0197-401f-85a1-aee75d36e50f" alt=""  />
+</p>
+</li>
+<li>
+<p>Next connect to the Azure Repo using Access Token:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/01630e6e-6dd1-4017-8bb8-533b68d2ce58" alt=""  />
+
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/65d224b9-e856-4f67-bbdd-878ffcbfe234" alt=""  />
+</p>
+</li>
+<li>
+<p>Deploy AzureRepo manifests using ArgoCD to the AKS Cluster:</p>
+<ul>
+<li>Repo
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/91f00419-7efc-4025-82e0-6a8e3f0bec02" alt=""  />
+</li>
+<li>Create the Application
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/7e2fe0d6-b755-4a80-89e5-eeee52970db2" alt=""  />
+</li>
+<li>ArgoCD Status
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/725739e0-bc8e-4539-8307-40208b3574e4" alt=""  />
+</li>
+</ul>
+</li>
+<li>
+<p>From kubectl perspective, all resources are deployed.</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre tabindex="0"><code>$ kubectl get pods
+NAME                      READY   STATUS    RESTARTS   AGE
+db-6d9f87bb9b-4ngfl       1/1     Running   0          2m18s
+redis-77fccb7f9-69wgp     1/1     Running   0          2m18s
+result-54b5ccfc95-xcbvc   1/1     Running   0          2m18s
+vote-5655bd759-8ln2p      1/1     Running   0          2m18s
+worker-7dd74bcbbb-d9slw   1/1     Running   0          2m18s
+ sanchit@FVFH81G2Q6LW  ~/devopsprojects/azure-arm  kubectl get all 
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/db-6d9f87bb9b-4ngfl       1/1     Running   0          2m26s
+pod/redis-77fccb7f9-69wgp     1/1     Running   0          2m26s
+pod/result-54b5ccfc95-xcbvc   1/1     Running   0          2m26s
+pod/vote-5655bd759-8ln2p      1/1     Running   0          2m26s
+pod/worker-7dd74bcbbb-d9slw   1/1     Running   0          2m26s
+
+NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/db           ClusterIP   10.0.125.79    &lt;none&gt;        5432/TCP         2m26s
+service/kubernetes   ClusterIP   10.0.0.1       &lt;none&gt;        443/TCP          40m
+service/redis        ClusterIP   10.0.145.41    &lt;none&gt;        6379/TCP         2m26s
+service/result       NodePort    10.0.191.177   &lt;none&gt;        5001:31001/TCP   2m26s
+service/vote         NodePort    10.0.65.200    &lt;none&gt;        5000:31000/TCP   2m26s
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/db       1/1     1            1           2m26s
+deployment.apps/redis    1/1     1            1           2m26s
+deployment.apps/result   1/1     1            1           2m26s
+deployment.apps/vote     1/1     1            1           2m26s
+deployment.apps/worker   1/1     1            1           2m26s
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/db-6d9f87bb9b       1         1         1       2m26s
+replicaset.apps/redis-77fccb7f9     1         1         1       2m26s
+replicaset.apps/result-54b5ccfc95   1         1         1       2m26s
+replicaset.apps/vote-5655bd759      1         1         1       2m26s
+replicaset.apps/worker-7dd74bcbbb   1         1         1       2m26s
+</code></pre><p>Vote U/I Loads as expected:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/11793893-0a3d-47cf-b03c-9c35f2fbb243" alt=""  />
+</p>
+<p>Now, at this point any change to the Azure Repo resources in <code>k8s-specifications</code>, ArgoCD will pickup the change and apply it on the AKS cluster.</p>
+<ul>
+<li>Update operation</li>
+</ul>
+<p>Now, we want to see what we need to do to ensure automatic updates to the pipeline and K8s resources if we make changes to vote application code to vote for &ldquo;Coffee/Tea&rdquo; instead of &ldquo;Cats/Dogs&rdquo;.</p>
+<p>Before working on changing the pipelines for Update stage, let&rsquo;s ensure our AKS cluster has authentication to pull images from our ACR.</p>
+<pre tabindex="0"><code>$ kubectl create secret docker-registry sanchitazurecicd-acr-secret --docker-server sanchitazurecicd.azurecr.io --docker-username sanchitazurecicd --docker-password=&lt;REDACTED&gt;
+secret/sanchitazurecicd-acr-secret created
+</code></pre><p>Ensure that the required deployment YAMLs also has the above created secret set in the ImagePullSecret parameter.</p>
+<p>Create a <code>updateK8sManifest.sh</code> script in the same repo. Example shown below:</p>
+<pre tabindex="0"><code>#!/bin/bash
+set -x
+# Set the repo URL
+REPO_URL=&#34;https://&lt;TOKEN&gt;@dev.azure.com/&lt;PROJECT&gt;/voting-app/_git/voting-app&#34;
+# Clone the git repo into the /tmp directory
+git clone &#34;$REPO_URL&#34; /tmp/temp_repo
+# Navigate into the cloned repo directory
+cd /tmp/temp_repo
+# To change the image tag in a deployment.yaml file. $1 represents the service name. $2 is repository name. $3 is the build tag.
+sed -i &#34;s|image:.*|image: &lt;ACR_LOGIN_SERVER&gt;/$2:$3|g&#34; k8s-specifications/$1-deployment.yaml
+# Add the modified files
+git add .
+# Commit the changes
+git commit -m &#34;Updated Kubernetes manifest&#34;
+# Push the changes back into the repo
+git push
+# Cleanup: remove the tmp directory
+rm -rf /tmp/temp_repo
+</code></pre><p>Next, update the vote-service pipeline to include update stage with input as the script file with the arguments.</p>
+<pre tabindex="0"><code>...
+- stage: Update
+  displayName: Update
+  jobs:
+  - job: Update
+    displayName: Update
+    steps:
+    - task: ShellScript@2
+      inputs:
+        scriptPath: &#39;manifest-update-scripts/updateK8sManifest.sh&#39;
+        args: &#39;vote $(imageRepository) $(tag)&#39;
+</code></pre><p>All 3 stages are successful on the new run for vote-service:
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/f724dee1-53e9-412f-a824-0e78dacc67de" alt=""  />
+</p>
+<p>Now, we can see new vote deployment image tag got created in ACR <code>votingapp:10</code> and the YAML file is also updated correctly and the new updated pod is running.</p>
+<pre tabindex="0"><code>$ kubectl get pod vote-67b9fcd78b-kpr6s -o yaml | grep -i image
+  - image: sanchitazurecicd.azurecr.io/votingapp:10
+    imagePullPolicy: Always
+</code></pre><p><img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/702f25d1-febe-403c-b3e6-dda6a649745c" alt=""  />
+</p>
+<h3 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
+<p>Below picture (not very asthetic) summarizes in short the entire CI/CD workflow that we acheived.
+<img loading="lazy" src="https://github.com/sanchitpathak7/blogsite/assets/44384286/5e62429d-532f-4806-95ed-6daa35d9782a" alt=""  />
+
+Hope this was helpful. Thank you for reading till the end!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/blog/ebs-volume-conversion/">
+    <span class="title">Next »</span>
+    <br>
+    <span>EBS Volume GP2 to GP3 Conversion using a CloudWatch Events Triggered Lambda Function</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://localhost:1313/">Sanchit Pathak</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

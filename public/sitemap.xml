@@ -13,18 +13,18 @@
   </url><url>
     <loc>http://localhost:1313/about/</loc>
   </url><url>
+    <loc>http://localhost:1313/blog/azure-devops-cicd/</loc>
+  </url><url>
     <loc>http://localhost:1313/blog/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/blog/nginx-lets-encrypt/</loc>
+    <loc>http://localhost:1313/blog/ebs-volume-conversion/</loc>
   </url><url>
     <loc>http://localhost:1313/blog/eks-with-terraform/</loc>
   </url><url>
     <loc>http://localhost:1313/notes/k8s/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-  </url><url>
-    <loc>http://localhost:1313/blog/bash/</loc>
   </url>
 </urlset>

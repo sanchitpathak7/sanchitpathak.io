@@ -8,6 +8,23 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Azure DevOps CI/CD Project for Distributed Microservice Application</title>
+      <link>http://localhost:1313/blog/azure-devops-cicd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/azure-devops-cicd/</guid>
+      <description>Azure DevOps is a suite of services provided by Microsoft Azure that allows teams to plan projects, collaborate on code development, and deploy applications. It includes services like Azure Repos for version control, Azure Pipelines for continuous integration and deployment (CI/CD), Azure Boards for project management, Azure Artifacts for package management, and Azure Test Plans for test management.
+Overall, it provides a comprehensive set of tools for software development and delivery, supporting agile practices and DevOps principles.</description>
+    </item>
+    <item>
+      <title>EBS Volume GP2 to GP3 Conversion using a CloudWatch Events Triggered Lambda Function</title>
+      <link>http://localhost:1313/blog/ebs-volume-conversion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/ebs-volume-conversion/</guid>
+      <description>In this blog post I am going over how to automate the conversion of EBS volumes from the GP2 type to GP3 by using CloudWatch Events to trigger a Lambda function upon volume creation ensuring that new volumes are automatically optimized.
+For a 2000 GB volume with approximate usage of 12 hours in a month, the charge calculation would be:
+For GP3: ($0.08 per GB-month * 2,000 GB * 43,200 seconds / (86,400 seconds/day * 30-day month)) = $2.</description>
+    </item>
+    <item>
       <title>EKS Cluster Provisioning with VPC Configuration using Terraform</title>
       <link>http://localhost:1313/blog/eks-with-terraform/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
