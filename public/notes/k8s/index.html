@@ -10,7 +10,7 @@
 <meta name="description" content="Create a Job which prints output $ kubectl create job hello --image=busybox:1.28 -- echo &#34;Hello World&#34; Create a CronJob that prints Hello World every minute kubectl create cronjob hello --image=busybox:1.28 --schedule=&#34;*/1 * * * *&#34; -- echo &#34;Hello World&#34; Get all running pods in the namespace kubectl get pods --field-selector=status.phase=Running Check which nodes are ready JSONPATH=&#39;{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}&#39; \ &amp;&amp; kubectl get nodes -o jsonpath=&#34;$JSONPATH&#34; | grep &#34;Ready=True&#34; List Events sorted by timestamp kubectl get events --sort-by=.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/notes/k8s/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.408d220ff985f3e6d32393330c71d26b93891f4c4b5811362fdd0395e903cb7a.css" integrity="sha256-QI0iD/mF8&#43;bTI5MzDHHSa5OJH0xLWBE2L90DlekDy3o=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.7ebdb09b9f353c4beb4b5cd63794ffcaac493ff418014513a5bf79e01c0408dd.css" integrity="sha256-fr2wm581PEvrS1zWN5T/yqxJP/QYAUUTpb954BwECN0=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
