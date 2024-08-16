@@ -2,8 +2,8 @@
 title = 'About Me'
 +++
 
-I have a profound passion for tackling complex challenges in cloud infrastructure across diverse platforms. My expertise revolves around leveraging Infrastructure as Code tools like Terraform, Ansible, and Saltstack, coupled with CI/CD pipelines. I excel in Docker, Kubernetes, and other cutting-edge technologies, embracing cloud-native and agile principles wholeheartedly. Recently, I've been delving deeper into Data Structures and Algorithms, enhancing my proficiency in Python and Bash scripting along the way.
+Experienced engineer adept at working with large-scale distributed systems. Working knowledge in technologies like Kubernetes, Openstack, Terraform, Linux, Cloud Networking etc.More than 5 years of experience in product development, infrastructure design and product support in public and private cloud domain.
 
-Currently working as a Cloud Operations Engineer at [Platform9 Systems](https://platform9.com) with overall experience of 5 years in this domain.
+Currently working as a Software Engineer at [Platform9 Systems](https://platform9.com) implementing Kubernetes controllers and operators leveraging Golang. Fixing product defects and ensuring features are instrumented with the right metrics and telemetry for effective monitoring. Developing microservice solutions for integrations with Auth0 and Stripe. Designing and building end to end CICD pipelines to help automate code integrations.
 
 [LinkedIn](https://www.linkedin.com/in/sanchit-pathak7/) | [GitHub](https://github.com/sanchitpathak7/)
